@@ -1,0 +1,86 @@
+:root {
+    --size: min(14vh, 14vw);
+    --transition-time: 1s;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .tile {
+    width: var(--size);
+    height: var(--size);
+    background-color: aquamarine;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: var(--transition-time) transform;
+    position: relative;
+  }
+  
+  .tile .front,
+  .tile .back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .tile .front {
+    background-color: aquamarine;
+    /* transform: rotateY(0deg); */
+  }
+  
+  .tile .back {
+    background-color: yellowgreen;
+    transform: rotateY(180deg);
+  }
+  
+  .tile.active .front {
+    transform: rotateY(180deg);
+  }
+  
+  .tile.active .back {
+    transform: rotateY(360deg);
+  }
+  
+  /* Ensure matched tiles remain visible */
+  .tile.match .front {
+    visibility: hidden;
+  }
+  
+  .tile.match .back {
+    visibility: visible;
+    transform: rotateY(0deg);
+  }
+  
+  .reset .tile {
+    animation: bubbleEffect 1.5s;
+  }
+  
+  @keyframes bubbleEffect {
+    25% {
+      scale: 0.4;
+    }
+    100% {
+      scale: 1;
+    }
+  }
+  
